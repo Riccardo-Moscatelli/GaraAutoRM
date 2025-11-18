@@ -1,22 +1,37 @@
-public class Auto implements Runnable {
- private int numero;
-  Giudice giudice;
-  private int velocita;
-  private int metriPercorsi;
+public class Auto extends Thread{
+ int numero;
+ int metripercorsi;
+ Giudice giudice;
 
-  public Auto(int numero, int velocita, int metripercorsi, Giudice giudice ){
+ public Auto(int numero, Giudice giudice) {
+  this.numero = numero;
+  this.metripercorsi = 0;
+  this.giudice = giudice;
+ }
 
+ public void addMetripercorsi() {
+  int numero = (int)(Math.random() * 200);
+  this.metripercorsi += numero;
+ }
+
+ @Override
+ public void run() {
+  while (metripercorsi < 1000) {
+   addMetripercorsi();
+   System.out.println("Auto " + numero + " ha percorso " + metripercorsi + "m\n");
+   try {
+    Thread.sleep(2000 + (int)(Math.random() * 5000));
+   } catch (InterruptedException e) {
+    throw new RuntimeException(e);
+   }
 
   }
+  System.out.println("Auto " + numero + " ha finito");
+  giudice.autoArrivata(this);
+ }
 
-  @Override
-  public void run() {
-
-  }
-
-  //stampare inizio gara, io auto inizio la gara, ogni secondo devo percorrere un certo numero di metri random(sleep) fino a raggiungere la lunghezzaGara
-  //fino a superare la lunghezza della gara(lo decide il giudice o il main) ((nel wile verificare che abbia raggiunto lunghezzaAuto))
-//verificare se ho finto (lo fa il giudice
-  //fine gara
-
+ @Override
+ public String toString() {
+  return "auto " + numero;
+ }
 }
