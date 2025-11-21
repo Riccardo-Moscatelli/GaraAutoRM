@@ -1,0 +1,64 @@
+Classe Auto
+Costruttore Auto(int numero, Giudice giudice)
+
+Serve per creare un’auto nuova, assegnandole un numero e collegandola al giudice.
+Imposta i metri percorsi a zero.
+
+addMetripercorsi()
+
+Aggiunge una quantità casuale di metri (da 0 a 199) ai metri percorsi dall’auto.
+
+run()
+
+È il comportamento dell’auto durante la gara.
+Finché non raggiunge 1000 metri:
+
+aumenta i metri percorsi
+
+stampa quanti ne ha fatti
+
+si ferma per un tempo casuale per simulare una velocità diversa
+Quando finisce, avvisa il giudice.
+
+toString()
+
+Restituisce una frase semplice che rappresenta l’auto, composta dalla parola "auto" e dal suo numero.
+
+Classe Giudice
+addAuto(Auto auto)
+
+Aggiunge una nuova auto alla lista delle auto che parteciperanno alla gara.
+
+autoArrivata(Auto auto)
+
+Viene chiamato da un’auto quando finisce la gara.
+Il giudice la aggiunge alla classifica nell’ordine in cui arriva.
+
+inizioGara()
+
+Avvia la gara.
+Esegue:
+
+conto alla rovescia
+
+avvio di tutte le auto
+
+attesa che tutte finiscano
+
+stampa della classifica finale
+
+stampaClassifica()
+
+Mostra a schermo l’ordine di arrivo delle auto.
+
+Classe GaraAuto
+main()
+
+Gestisce il menu.
+Permette di:
+
+inserire nuove auto
+
+far partire la gara
+
+uscire dal programma
