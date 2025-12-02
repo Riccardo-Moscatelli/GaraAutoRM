@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class Giudice{
-    private ArrayList<Auto> automobili;
-    private ArrayList<Auto> classificaFinale;
+public class Giudice {
+    private final ArrayList<Auto> automobili;
+    private final ArrayList<Auto> classificaFinale;
 
-    public Giudice(){
-        this.automobili = new ArrayList<>();
-        this.classificaFinale = new ArrayList<>();
+    public Giudice() {
+        automobili = new ArrayList<>();
+        classificaFinale = new ArrayList<>();
     }
 
     public void addAuto(Auto auto) {
@@ -15,37 +15,39 @@ public class Giudice{
 
     public synchronized void autoArrivata(Auto auto) {
         classificaFinale.add(auto);
-        System.out.println("Il giudice registra l’arrivo di " + auto.toString() + "\n");
+        System.out.println("Il giudice registra l'arrivo di " + auto + "\n");
     }
 
     public void inizioGara() throws InterruptedException {
-        System.out.println("Inizio gara");
+        System.out.println("Inizio gara...");
 
         for (int i = 5; i > 0; i--) {
-            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+            Thread.sleep(1000);
             System.out.println(i);
         }
-        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
-        System.out.println("VIA");
+        Thread.sleep(1000);
+        System.out.println("VIA!");
 
         for (Auto auto : automobili) {
             auto.start();
         }
+
         for (Auto auto : automobili) {
             auto.join();
         }
-        Thread.sleep(3000);
+
+        Thread.sleep(2000);
         stampaClassifica();
     }
 
     public void stampaClassifica() {
-        for (int i=0; i<15; i++) {
-            System.out.println("\n");
+        System.out.println("\n--- CLASSIFICA FINALE ---");
+        for (int i = 0; i < classificaFinale.size(); i++) {
+            System.out.println((i + 1) + "° posto -> " + classificaFinale.get(i));
         }
-        System.out.println("Classifica:\n");
-        for(int num = 0; num < classificaFinale.size(); ++num) {
-            System.out.println((num+1) + " posto: " + (classificaFinale.get(num)).toString());
-        }
+    }
 
+    public ArrayList<Auto> getClassifica() {
+        return classificaFinale;
     }
 }
