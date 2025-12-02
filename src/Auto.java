@@ -1,37 +1,37 @@
-public class Auto extends Thread{
- int numero;
- int metripercorsi;
- Giudice giudice;
+public class Auto extends Thread {
+    private final int numero;
+    private int metriPercorsi;
+    private final Giudice giudice;
 
- public Auto(int numero, Giudice giudice) {
-  this.numero = numero;
-  this.metripercorsi = 0;
-  this.giudice = giudice;
- }
+    public Auto(int numero, Giudice giudice) {
+        this.numero = numero;
+        this.metriPercorsi = 0;
+        this.giudice = giudice;
+    }
 
- public void addMetripercorsi() {
-  int numero = (int)(Math.random() * 200);
-  this.metripercorsi += numero;
- }
+    private void avanzaCasualmente() {
+        metriPercorsi += (int)(Math.random() * 200);
+    }
 
- @Override
- public void run() {
-  while (metripercorsi < 1000) {
-   addMetripercorsi();
-   System.out.println("Auto " + numero + " ha percorso " + metripercorsi + "m\n");
-   try {
-    Thread.sleep(2000 + (int)(Math.random() * 5000));
-   } catch (InterruptedException e) {
-    throw new RuntimeException(e);
-   }
+    @Override
+    public void run() {
+        while (metriPercorsi < 1000) {
+            avanzaCasualmente();
+            System.out.println("Auto " + numero + " ha percorso " + metriPercorsi + " metri");
 
-  }
-  System.out.println("Auto " + numero + " ha finito");
-  giudice.autoArrivata(this);
- }
+            try {
+                Thread.sleep(2000 + (int)(Math.random() * 5000));
+            } catch (InterruptedException e) {
+                System.out.println("Errore thread auto " + numero);
+            }
+        }
 
- @Override
- public String toString() {
-  return "auto " + numero;
- }
+        System.out.println("Auto " + numero + " ha completato la gara!");
+        giudice.autoArrivata(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Auto " + numero;
+    }
 }
