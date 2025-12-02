@@ -4,24 +4,34 @@ public class GaraAuto {
     public static void main(String[] args) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         Giudice giudice = new Giudice();
-        boolean stop = false;
-        int scelta = 3;
+        GestoreFile file = new GestoreFile();
+        int scelta = -1;
 
-        while(scelta != 2 && scelta != 0) {
-            System.out.println("1: inserisci un'auto 2: fai partire la gara 0: quit");
+        while (scelta != 0 && scelta != 2) {
+            System.out.println("1) Aggiungi auto");
+            System.out.println("2) Avvia gara");
+            System.out.println("0) Esci");
+            System.out.print("Scelta: ");
             scelta = scanner.nextInt();
+
             switch (scelta) {
                 case 1:
-                    System.out.println("inserisci il numero dell'auto: \n");
-                    giudice.addAuto(new Auto(scanner.nextInt(), giudice));
+                    System.out.print("Inserisci ID auto: ");
+                    int id = scanner.nextInt();
+                    giudice.addAuto(new Auto(id, giudice));
                     break;
+
                 case 2:
                     giudice.inizioGara();
+                    file.salvaClassifica(giudice.getClassifica());
                     break;
+
                 case 0:
+                    System.out.println("Uscita dal programma");
                     break;
+
                 default:
-                    System.out.println("inserisci 1 o 2\n");
+                    System.out.println("Scelta non valida"):
             }
         }
     }
