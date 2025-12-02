@@ -19,7 +19,7 @@ public class Giudice {
     }
 
     public void inizioGara() throws InterruptedException {
-        System.out.println("Inizio gara...");
+        System.out.println("Inizio gara");
 
         for (int i = 5; i > 0; i--) {
             Thread.sleep(1000);
@@ -41,7 +41,7 @@ public class Giudice {
     }
 
     public void stampaClassifica() {
-        System.out.println("\n--- CLASSIFICA FINALE ---");
+        System.out.println("\nCLASSIFICA FINALE");
         for (int i = 0; i < classificaFinale.size(); i++) {
             System.out.println((i + 1) + "° posto -> " + classificaFinale.get(i));
         }
